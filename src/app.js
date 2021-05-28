@@ -11,3 +11,7 @@ socket.on('newPositions', (data) => {
   for (let i = 0; i < data.length; i += 1)
     ctx.fillText(data[i].number, data[i].x, data[i].y);
 });
+
+/* TODO
+FIX CONFLICTS WITH WEBPACK
+*/
