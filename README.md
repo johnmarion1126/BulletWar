@@ -1,4 +1,4 @@
-# Run & Shoot
+# Run And Shoot
 A small game made with html, css, and javascript.
 
 ## References
