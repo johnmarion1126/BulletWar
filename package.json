@@ -1,38 +1,21 @@
 {
-  "name": "html5-game",
+  "name": "WebPackServer",
   "version": "1.0.0",
-  "description": "A small game made with html, css, and javascript.",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
-    "start": "node dist/bundle.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/johnmarion1126/html5-game.git"
+    "server": "node server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/johnmarion1126/html5-game/issues"
-  },
-  "homepage": "https://github.com/johnmarion1126/html5-game#readme",
   "devDependencies": {
-    "crypto-browserify": "^3.12.0",
-    "eslint": "^7.26.0",
-    "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-import": "^2.23.2",
-    "eslint-plugin-prettier": "^3.4.0",
-    "node-polyfill-webpack-plugin": "^1.1.2",
-    "prettier": "^2.3.0",
-    "webpack": "^5.37.1",
-    "webpack-cli": "^4.7.0"
-  },
-  "dependencies": {
     "express": "^4.17.1",
-    "socket.io": "^4.1.2"
+    "webpack": "^5.38.1",
+    "webpack-cli": "^4.7.0",
+    "webpack-dev-middleware": "^4.3.0",
+    "webpack-dev-server": "^3.11.2"
   }
 }
