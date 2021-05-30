@@ -12,13 +12,16 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "express": "^4.17.1",
-    "webpack": "^5.38.1",
+    "eslint": "^7.27.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.23.4",
     "webpack-cli": "^4.7.0",
     "webpack-dev-middleware": "^4.3.0",
     "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
+    "express": "^4.17.1",
+    "webpack": "^5.38.1",
     "ws": "^7.4.6"
   }
 }
