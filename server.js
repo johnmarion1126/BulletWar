@@ -1,10 +1,9 @@
-const express = require('express');
+import {
+  io, app,
+} from './src/io';
+
 const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
-
-const app = express();
-const server = require('http').Server(app);
-const io = require('socket.io')(server, {});
 const config = require('./webpack.config');
 
 const compiler = webpack(config);
@@ -23,7 +22,7 @@ app.listen(3000, () => {
 app.get('/', (req, res) => {
   res.sendFile('dist/index.html', { root: __dirname });
 });
-/*
+
 const socketList = [];
 
 io.sockets.on('connection', (socket) => {
@@ -51,4 +50,8 @@ setInterval(() => {
     socket.emit('newPositions', pack);
   });
 }, 1000 / 25);
+
+/*
+TODO:
+Add dependencies to fix polyfills and path errors
 */
