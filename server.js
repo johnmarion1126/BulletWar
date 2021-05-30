@@ -23,7 +23,7 @@ app.listen(3000, () => {
 app.get('/', (req, res) => {
   res.sendFile('dist/index.html', { root: __dirname });
 });
-
+/*
 const socketList = [];
 
 io.sockets.on('connection', (socket) => {
@@ -51,3 +51,4 @@ setInterval(() => {
     socket.emit('newPositions', pack);
   });
 }, 1000 / 25);
+*/

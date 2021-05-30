@@ -1,0 +1,23 @@
+/*Reset browser for styling*/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+/*General Styling*/
+html {
+  font-family: Helvetica, sans-serif;
+  font-size: 62.5%;
+  line-height: 1.6;
+}
+
+/*Canvas Styling*/
+#ctx {
+  width: 500px;
+  height: 500px;
+  border: 1px solid black;
+  background-color: black;
+}
