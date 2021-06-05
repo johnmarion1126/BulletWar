@@ -3,6 +3,10 @@ const app = express();
 const server = require('http').Server(app);
 const path = require('path');
 
+const io = require('socket.io')(server, {});
+const Player = require('./server/Player');
+const Bullet = require('./server/Bullet');
+
 // eslint-disable-next-line no-path-concat
 app.use(express.static(path.join(__dirname, '/client')));
 
@@ -17,12 +21,8 @@ console.log('Server started');
 
 const socketList = [];
 
-const io = require('socket.io')(server, {});
 io.sockets.on('connection', (socket) => {
-  socket.io = Math.random();
-  socket.x = 0;
-  socket.y = 0;
-  socket.number = `${Math.floor(10 * Math.random())}`;
+  socket.id = Math.random();
   socketList.push(socket);
 
   socket.on('disconnect', () => {
@@ -48,3 +48,6 @@ setInterval(() => {
     socket.emit('newPositions', pack);
   });
 }, 1000 / 25);
+
+const playerList = [];
+const bulletList = [];
