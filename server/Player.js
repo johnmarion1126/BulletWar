@@ -1,7 +1,6 @@
 const Entity = require('./Entity');
 
-// eslint-disable-next-line no-unused-vars
-module.exports = class Player extends Entity {
+class Player extends Entity {
   constructor(id) {
     super();
     this.id = id;
@@ -27,11 +26,12 @@ module.exports = class Player extends Entity {
       this.spdX = 0;
     }
   }
-};
+}
 
-/*
-Player.onConnect = (socket) => {
+const playerConnect = (socket, playerList) => {
   const player = new Player(socket.id);
+  playerList.push(player);
+
   socket.on('keyPress', (data) => {
     if (data.inputId === 'left') {
       player.pressingLeft = data.state;
@@ -45,10 +45,27 @@ Player.onConnect = (socket) => {
   });
 };
 
-Player.onDisconnect = (socket) => {
+const playerDisconnect = (socket, playerList) => {
+  delete playerList[socket.id];
+};
 
-}
+const playerUpdate = (playerList) => {
+  const pack = [];
+  playerList.forEach((i) => {
+    const player = i;
+    player.update();
+    pack.push({
+      x: player.x,
+      y: player.y,
+      number: player.number,
+    });
+  });
+  return pack;
+};
 
-Player.update = () {
-}
-*/
+module.exports = {
+  Player,
+  playerConnect,
+  playerDisconnect,
+  playerUpdate,
+};

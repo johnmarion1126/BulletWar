@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-unused-vars
 module.exports = class Entity {
   constructor() {
     this.x = 250;

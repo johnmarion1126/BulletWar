@@ -1,6 +1,5 @@
 const Entity = require('./Entity');
 
-// eslint-disable-next-line no-unused-vars
 class Bullet extends Entity {
   constructor(angle) {
     super();
@@ -21,8 +20,25 @@ class Bullet extends Entity {
   }
 }
 
-/*
-Bullet.update = () {
+const bulletUpdate = (bulletList) => {
+  if (Math.random() < 0.1) {
+    // eslint-disable-next-line no-unused-vars
+    const randBullet = new Bullet(Math.random() * 360);
+  }
 
-}
-*/
+  const pack = [];
+  bulletList.forEach((i) => {
+    const bullet = i;
+    bullet.update();
+    pack.push({
+      x: bullet.x,
+      y: bullet.y,
+    });
+  });
+  return pack;
+};
+
+module.exports = {
+  Bullet,
+  bulletUpdate,
+};
