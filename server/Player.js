@@ -25,6 +25,14 @@ class Player extends Entity {
     } else {
       this.spdX = 0;
     }
+
+    if (this.pressingUp) {
+      this.spdY = -this.maxSpd;
+    } else if (this.pressingDown) {
+      this.spdY = this.maxSpd;
+    } else {
+      this.spdY = 0;
+    }
   }
 }
 
@@ -46,7 +54,11 @@ const playerConnect = (socket, playerList) => {
 };
 
 const playerDisconnect = (socket, playerList) => {
-  delete playerList[socket.id];
+  for (let i = 0; i < playerList.length; i += 1) {
+    if (playerList[i].id === socket.id) {
+      playerList.splice(i, 1);
+    }
+  }
 };
 
 const playerUpdate = (playerList) => {

@@ -16,6 +16,7 @@ server.listen(2000);
 // eslint-disable-next-line no-console
 console.log('Server started');
 
+const { Socket } = require('dgram');
 const {
   Player,
   playerConnect,
@@ -46,7 +47,7 @@ io.sockets.on('connection', (socket) => {
   socket.on('sendMsgToServer', (data) => {
     const playerName = ('' + socket.id).slice(2, 7);
     socketList.forEach((i) => {
-      socketList[i].emit('addToChat', playerName + ': ' + data);
+      i.emit('addToChat', playerName + ': ' + data);
     });
   });
 });
@@ -58,7 +59,6 @@ setInterval(() => {
   };
 
   socketList.forEach((i) => {
-    const socket = i;
-    socket.emit('newPositions', pack);
+    i.emit('newPositions', pack);
   });
 }, 1000 / 25);

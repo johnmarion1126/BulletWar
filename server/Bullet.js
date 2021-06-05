@@ -21,8 +21,7 @@ class Bullet extends Entity {
 }
 
 const bulletUpdate = (bulletList) => {
-  if (Math.random() < 0.1) {
-    // eslint-disable-next-line no-unused-vars
+  if (Math.random() < 0.5) {
     const randBullet = new Bullet(Math.random() * 360);
   }
 
