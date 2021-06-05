@@ -21,3 +21,13 @@ html {
   border: 1px solid black;
   font: 30px Arial;
 }
+
+#chat-text {
+  width: 500px;
+  height: 100px;
+  overflow-y: scroll;
+}
+
+#chat-input {
+  width: 500px;
+}
