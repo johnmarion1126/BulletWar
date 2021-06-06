@@ -1,4 +1,13 @@
 const Entity = require('./Entity');
+const { Bullet, getAllBulletInitPack } = require('./Bullet');
+
+const getAllPlayerInitPack = (playerList) => {
+  const players = [];
+  for (const i in playerList) {
+    players.push(playerList[i].getInitPack());
+  }
+  return players;
+};
 
 class Player extends Entity {
   constructor(id) {
@@ -9,12 +18,28 @@ class Player extends Entity {
     this.pressingLeft = false;
     this.pressingUp = false;
     this.pressingDown = false;
+
+    this.mouseAngle = 0;
     this.maxSpd = 10;
+    this.hp = 10;
+    this.hpMax = 10;
+    this.score = 0;
+    this.playerInitPackUpdate();
   }
 
   update() {
     this.updateSpd();
     this.updatePosition();
+
+    if (this.pressingAttack) {
+      this.shootBullet(this.mouseAngle);
+    }
+  }
+
+  shootBullet(angle) {
+    const b = new Bullet(this.id, angle);
+    b.x = this.x;
+    b.y = this.y;
   }
 
   updateSpd() {
@@ -34,9 +59,37 @@ class Player extends Entity {
       this.spdY = 0;
     }
   }
+
+  getInitPack() {
+    return {
+      id: this.id,
+      x: this.x,
+      y: this.y,
+      number: this.number,
+      hp: this.hp,
+      hpMax: this.hpMax,
+      score: this.score,
+    };
+  }
+
+  getUpdatePack() {
+    return {
+      id: this.id,
+      x: this.x,
+      y: this.y,
+      hp: this.hp,
+      score: this.score,
+    };
+  }
+
+  // TODO:
+  // ADD THIS METHOD TO CONSTRUCTOR
+  playerInitPackUpdate(initPack) {
+    initPack.player.push(this.getInitPack());
+  }
 }
 
-const playerConnect = (socket, playerList) => {
+const playerConnect = (socket, playerList, bulletList) => {
   const player = new Player(socket.id);
   playerList[socket.id] = player;
 
@@ -49,12 +102,22 @@ const playerConnect = (socket, playerList) => {
       player.pressingUp = data.state;
     } else if (data.inputId === 'down') {
       player.pressingDown = data.state;
+    } else if (data.inputId === 'attack') {
+      player.pressingAttack = data.state;
+    } else if (data.inputId === 'mouseAngle') {
+      player.mouseAngle = data.state;
     }
+  });
+
+  socket.emit('init', {
+    player: getAllPlayerInitPack(playerList),
+    bullet: getAllBulletInitPack(bulletList),
   });
 };
 
-const playerDisconnect = (socket, playerList) => {
+const playerDisconnect = (socket, playerList, removePack) => {
   delete playerList[socket.id];
+  removePack.player.push(socket.id);
 };
 
 const playerUpdate = (playerList) => {
@@ -62,17 +125,12 @@ const playerUpdate = (playerList) => {
   for (const i in playerList) {
     const player = playerList[i];
     player.update();
-    pack.push({
-      x: player.x,
-      y: player.y,
-      number: player.number,
-    });
+    pack.push(player.getUpdatePack());
   }
   return pack;
 };
 
 module.exports = {
-  Player,
   playerConnect,
   playerDisconnect,
   playerUpdate,

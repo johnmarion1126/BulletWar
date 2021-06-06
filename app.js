@@ -16,32 +16,33 @@ server.listen(2000);
 // eslint-disable-next-line no-console
 console.log('Server started');
 
-const { Socket } = require('dgram');
 const {
-  Player,
   playerConnect,
   playerDisconnect,
   playerUpdate,
 } = require('./server/Player');
 
-const {
-  Bullet,
-  bulletUpdate,
-} = require('./server/Bullet');
+const { bulletUpdate } = require('./server/Bullet');
 
 const socketList = {};
 const playerList = {};
 const bulletList = {};
 
+const initPack = { player: [], bullet: [] };
+const removePack = { player: [], bullet: [] };
+
 io.sockets.on('connection', (socket) => {
   socket.id = Math.random();
   socketList[socket.id] = socket;
 
-  playerConnect(socket, playerList);
+  socket.on('signIn', (data) => {
+    playerConnect(socket, playerList, bulletList);
+    socket.emit('signInResponse');
+  });
 
   socket.on('disconnect', () => {
     delete socketList[socket.id];
-    playerDisconnect(socket, playerList);
+    playerDisconnect(socket, playerList, removePack);
   });
 
   socket.on('sendMsgToServer', (data) => {
@@ -55,10 +56,17 @@ io.sockets.on('connection', (socket) => {
 setInterval(() => {
   const pack = {
     player: playerUpdate(playerList),
-    bullet: bulletUpdate(bulletList),
+    bullet: bulletUpdate(bulletList, playerList, removePack),
   };
 
   for (const i in socketList) {
-    socketList[i].emit('newPositions', pack);
+    const socket = socketList[i];
+    socket.emit('init', initPack);
+    socket.emit('update', pack);
+    socket.emit('remove', removePack);
   }
+  initPack.player = [];
+  initPack.bullet = [];
+  removePack.player = [];
+  removePack.bullet = [];
 }, 1000 / 25);

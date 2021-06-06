@@ -27,3 +27,7 @@ html {
 #chat-input {
   width: 500px;
 }
+
+#game-div {
+  display: none;
+}
