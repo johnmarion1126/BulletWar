@@ -15,10 +15,7 @@ html {
 
 /*Canvas Styling*/
 #ctx {
-  width: 500px;
-  height: 500px;
   border: 1px solid black;
-  font: 30px Arial;
 }
 
 #chat-text {

@@ -9,7 +9,7 @@
     <title>Run And Shoot</title>
 </head>
 <body>
-    <canvas id="ctx"></canvas>
+    <canvas id="ctx" width="500" height="500"></canvas>
     <div id="chat-text">
         <div>Hello!</div>
     </div>
@@ -20,11 +20,12 @@
 
     <script>
 
+        const socket = io();
         const chatText = document.getElementById('chat-text');
         const chatInput = document.getElementById('chat-input');
         const chatForm = document.getElementById('chat-form');
         const ctx = document.getElementById("ctx").getContext("2d");
-        const socket = io();
+        ctx.font = '30px Arial';
 
         socket.on('newPositions', (data) => {
             ctx.clearRect(0, 0, 500, 500);

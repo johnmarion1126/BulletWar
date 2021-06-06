@@ -21,7 +21,7 @@ class Bullet extends Entity {
 }
 
 const bulletUpdate = (bulletList) => {
-  if (Math.random() < 0.5) {
+  if (Math.random() < 0.1) {
     const randBullet = new Bullet(Math.random() * 360);
     bulletList[randBullet.id] = randBullet;
   }
