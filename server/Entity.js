@@ -1,7 +1,7 @@
 module.exports = class Entity {
   constructor() {
-    this.x = 250;
-    this.y = 250;
+    this.x = 150;
+    this.y = 75;
     this.spdX = 0;
     this.id = '';
     return this;
