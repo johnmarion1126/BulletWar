@@ -23,17 +23,18 @@ class Bullet extends Entity {
 const bulletUpdate = (bulletList) => {
   if (Math.random() < 0.5) {
     const randBullet = new Bullet(Math.random() * 360);
+    bulletList[randBullet.id] = randBullet;
   }
 
   const pack = [];
-  bulletList.forEach((i) => {
-    const bullet = i;
+  for (const i in bulletList) {
+    const bullet = bulletList[i];
     bullet.update();
     pack.push({
       x: bullet.x,
       y: bullet.y,
     });
-  });
+  }
   return pack;
 };
 

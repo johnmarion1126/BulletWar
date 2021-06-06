@@ -29,13 +29,13 @@ const {
   bulletUpdate,
 } = require('./server/Bullet');
 
-const socketList = [];
-const playerList = [];
-const bulletList = [];
+const socketList = {};
+const playerList = {};
+const bulletList = {};
 
 io.sockets.on('connection', (socket) => {
   socket.id = Math.random();
-  socketList.push(socket);
+  socketList[socket.id] = socket;
 
   playerConnect(socket, playerList);
 
@@ -46,9 +46,9 @@ io.sockets.on('connection', (socket) => {
 
   socket.on('sendMsgToServer', (data) => {
     const playerName = ('' + socket.id).slice(2, 7);
-    socketList.forEach((i) => {
-      i.emit('addToChat', playerName + ': ' + data);
-    });
+    for (const i in socketList) {
+      socketList[i].emit('addToChat', playerName + ': ' + data);
+    }
   });
 });
 
@@ -58,7 +58,7 @@ setInterval(() => {
     bullet: bulletUpdate(bulletList),
   };
 
-  socketList.forEach((i) => {
-    i.emit('newPositions', pack);
-  });
+  for (const i in socketList) {
+    socketList[i].emit('newPositions', pack);
+  }
 }, 1000 / 25);

@@ -38,7 +38,7 @@ class Player extends Entity {
 
 const playerConnect = (socket, playerList) => {
   const player = new Player(socket.id);
-  playerList.push(player);
+  playerList[socket.id] = player;
 
   socket.on('keyPress', (data) => {
     if (data.inputId === 'left') {
@@ -54,24 +54,20 @@ const playerConnect = (socket, playerList) => {
 };
 
 const playerDisconnect = (socket, playerList) => {
-  for (let i = 0; i < playerList.length; i += 1) {
-    if (playerList[i].id === socket.id) {
-      playerList.splice(i, 1);
-    }
-  }
+  delete playerList[socket.id];
 };
 
 const playerUpdate = (playerList) => {
   const pack = [];
-  playerList.forEach((i) => {
-    const player = i;
+  for (const i in playerList) {
+    const player = playerList[i];
     player.update();
     pack.push({
       x: player.x,
       y: player.y,
       number: player.number,
     });
-  });
+  }
   return pack;
 };
 
