@@ -1,7 +1,7 @@
 const Entity = require('./Entity');
 
 class Bullet extends Entity {
-  constructor(parent, angle) {
+  constructor(parent, angle, initPack) {
     super();
     this.id = Math.random();
     this.spdX = Math.cos(angle / 180 * Math.PI) * 10;
@@ -9,7 +9,7 @@ class Bullet extends Entity {
     this.parent = parent;
     this.timer = 0;
     this.toRemove = false;
-    this.bulletInitPackUpdate();
+    this.bulletInitPackUpdate(initPack);
   }
 
   update(playerList) {
@@ -62,6 +62,7 @@ const bulletUpdate = (bulletList, playerList, removePack) => {
   for (const i in bulletList) {
     const bullet = bulletList[i];
     bullet.update(playerList);
+
     if (bullet.toRemove) {
       delete bulletList[i];
       removePack.bullet.push(bullet.id);

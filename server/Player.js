@@ -10,7 +10,7 @@ const getAllPlayerInitPack = (playerList) => {
 };
 
 class Player extends Entity {
-  constructor(id) {
+  constructor(id, initPack) {
     super();
     this.id = id;
     this.number = '' + Math.floor(10 * Math.random());
@@ -24,20 +24,21 @@ class Player extends Entity {
     this.hp = 10;
     this.hpMax = 10;
     this.score = 0;
-    this.playerInitPackUpdate();
+    this.playerInitPackUpdate(initPack);
   }
 
-  update() {
+  update(bulletList, initPack) {
     this.updateSpd();
     this.updatePosition();
 
     if (this.pressingAttack) {
-      this.shootBullet(this.mouseAngle);
+      this.shootBullet(this.mouseAngle, bulletList, initPack);
     }
   }
 
-  shootBullet(angle) {
-    const b = new Bullet(this.id, angle);
+  shootBullet(angle, bulletList, initPack) {
+    const b = new Bullet(this.id, angle, initPack);
+    bulletList[b.id] = b;
     b.x = this.x;
     b.y = this.y;
   }
@@ -82,15 +83,13 @@ class Player extends Entity {
     };
   }
 
-  // TODO:
-  // ADD THIS METHOD TO CONSTRUCTOR
   playerInitPackUpdate(initPack) {
     initPack.player.push(this.getInitPack());
   }
 }
 
-const playerConnect = (socket, playerList, bulletList) => {
-  const player = new Player(socket.id);
+const playerConnect = (socket, playerList, bulletList, initPack) => {
+  const player = new Player(socket.id, initPack);
   playerList[socket.id] = player;
 
   socket.on('keyPress', (data) => {
@@ -120,11 +119,11 @@ const playerDisconnect = (socket, playerList, removePack) => {
   removePack.player.push(socket.id);
 };
 
-const playerUpdate = (playerList) => {
+const playerUpdate = (playerList, bulletList, initPack) => {
   const pack = [];
   for (const i in playerList) {
     const player = playerList[i];
-    player.update();
+    player.update(bulletList, initPack);
     pack.push(player.getUpdatePack());
   }
   return pack;

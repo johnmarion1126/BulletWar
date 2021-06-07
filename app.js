@@ -36,7 +36,7 @@ io.sockets.on('connection', (socket) => {
   socketList[socket.id] = socket;
 
   socket.on('signIn', (data) => {
-    playerConnect(socket, playerList, bulletList);
+    playerConnect(socket, playerList, bulletList, initPack);
     socket.emit('signInResponse');
   });
 
@@ -55,7 +55,7 @@ io.sockets.on('connection', (socket) => {
 
 setInterval(() => {
   const pack = {
-    player: playerUpdate(playerList),
+    player: playerUpdate(playerList, bulletList, initPack),
     bullet: bulletUpdate(bulletList, playerList, removePack),
   };
 
