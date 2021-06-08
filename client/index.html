@@ -9,22 +9,21 @@
     <title>Run And Shoot</title>
 </head>
 <body>
-    <div id="container">
-        <div id="sign-div">
-            Username: <input id="sign-div-username" type="text">
-            <button id="sign-div-enter">Enter</button>
+
+    <div id="sign-div">
+        Username: <input id="sign-div-username" type="text"><br>
+        <button id="sign-div-enter">Enter</button>
+    </div>
+
+    <div id="game-div">
+        <canvas id="ctx" width="500" height="500"></canvas>
+        <div id="chat-text">
+            <div>Hello!</div>
         </div>
 
-        <div id="game-div">
-            <canvas id="ctx" width="500" height="500"></canvas>
-            <div id="chat-text">
-                <div>Hello!</div>
-            </div>
-
-            <form id="chat-form">
-                <input id="chat-input" type="text">
-            </form>
-        </div>
+        <form id="chat-form">
+            <input id="chat-input" type="text">
+        </form>
     </div>
 
     <script>

@@ -13,15 +13,14 @@ html {
   line-height: 1.6;
 }
 
-#container {
+#sign-div {
   display: flex;
   justify-content: center;
   align-items: center;
   border: 1px solid black;
-  height: 600px;
-  width: 600px;
   margin: auto;
-  margin-top: 25px;
+  margin-top: 300px;
+  padding: 10px;
 }
 
 /*Canvas Styling*/
@@ -43,4 +42,5 @@ html {
 /*Game Styling*/
 #game-div {
   display: none;
+  margin: 20px 425px;
 }
