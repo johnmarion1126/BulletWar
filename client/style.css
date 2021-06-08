@@ -13,11 +13,23 @@ html {
   line-height: 1.6;
 }
 
+#container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+  height: 600px;
+  width: 600px;
+  margin: auto;
+  margin-top: 25px;
+}
+
 /*Canvas Styling*/
 #ctx {
   border: 1px solid black;
 }
 
+/*Chat Styling*/
 #chat-text {
   width: 500px;
   height: 100px;
@@ -28,6 +40,7 @@ html {
   width: 500px;
 }
 
+/*Game Styling*/
 #game-div {
   display: none;
 }
