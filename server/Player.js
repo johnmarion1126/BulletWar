@@ -10,7 +10,7 @@ const getAllPlayerInitPack = (playerList) => {
 };
 
 class Player extends Entity {
-  constructor(id, initPack) {
+  constructor(id, initPack, name) {
     super();
     this.id = id;
     this.number = '' + Math.floor(10 * Math.random());
@@ -24,6 +24,7 @@ class Player extends Entity {
     this.hp = 10;
     this.hpMax = 10;
     this.score = 0;
+    this.name = name;
     this.playerInitPackUpdate(initPack);
   }
 
@@ -88,8 +89,8 @@ class Player extends Entity {
   }
 }
 
-const playerConnect = (socket, playerList, bulletList, initPack) => {
-  const player = new Player(socket.id, initPack);
+const playerConnect = (socket, playerList, bulletList, initPack, name) => {
+  const player = new Player(socket.id, initPack, name);
   playerList[socket.id] = player;
 
   socket.on('keyPress', (data) => {

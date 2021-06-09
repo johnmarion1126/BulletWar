@@ -36,7 +36,7 @@ io.sockets.on('connection', (socket) => {
   socketList[socket.id] = socket;
 
   socket.on('signIn', (data) => {
-    playerConnect(socket, playerList, bulletList, initPack);
+    playerConnect(socket, playerList, bulletList, initPack, data.username);
     socket.emit('signInResponse');
   });
 
@@ -46,7 +46,7 @@ io.sockets.on('connection', (socket) => {
   });
 
   socket.on('sendMsgToServer', (data) => {
-    const playerName = ('' + socket.id).slice(2, 7);
+    const playerName = playerList[socket.id].name;
     for (const i in socketList) {
       socketList[i].emit('addToChat', playerName + ': ' + data);
     }
