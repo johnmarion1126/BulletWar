@@ -1,4 +1,5 @@
 const Entity = require('./Entity');
+const { WIDTH, HEIGHT } = require('./Constants');
 
 class Bullet extends Entity {
   constructor(parent, angle, initPack) {
@@ -17,6 +18,7 @@ class Bullet extends Entity {
     if (this.timer > 100) {
       this.toRemove = true;
     }
+
     this.updatePosition();
 
     for (const i in playerList) {
@@ -33,6 +35,18 @@ class Bullet extends Entity {
         }
         this.toRemove = true;
       }
+    }
+  }
+
+  updatePosition() {
+    this.x += this.spdX;
+    this.y += this.spdY;
+
+    if (this.x < 0 || this.x > WIDTH) {
+      this.spdX = -this.spdX;
+    }
+    if (this.y < 0 || this.y > HEIGHT) {
+      this.spdY = -this.spdY;
     }
   }
 
