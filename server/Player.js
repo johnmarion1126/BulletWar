@@ -2,6 +2,11 @@ const Entity = require('./Entity');
 const { Bullet, getAllBulletInitPack } = require('./Bullet');
 const { WIDTH, HEIGHT } = require('./Constants');
 
+const TOP_LIMIT = 40;
+const BOTTOM_LIMIT = HEIGHT - 12;
+const LEFT_LIMIT = 18;
+const RIGHT_LIMIT = WIDTH - 20;
+
 const getAllPlayerInitPack = (playerList) => {
   const players = [];
   for (const i in playerList) {
@@ -42,11 +47,16 @@ class Player extends Entity {
     this.x += this.spdX;
     this.y += this.spdY;
 
-    if (this.x < 0 || this.x > WIDTH) {
-      this.spdX = 0;
+    if (this.x < LEFT_LIMIT) {
+      this.x = LEFT_LIMIT;
+    } else if (this.x >= RIGHT_LIMIT) {
+      this.x = RIGHT_LIMIT;
     }
-    if (this.y < 0 || this.y > HEIGHT) {
-      this.spdY = 0;
+
+    if (this.y < TOP_LIMIT) {
+      this.y = TOP_LIMIT;
+    } else if (this.y >= BOTTOM_LIMIT) {
+      this.y = BOTTOM_LIMIT;
     }
   }
 
