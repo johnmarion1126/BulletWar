@@ -1,5 +1,6 @@
 const Entity = require('./Entity');
 const { Bullet, getAllBulletInitPack } = require('./Bullet');
+const { WIDTH, HEIGHT } = require('./Constants');
 
 const getAllPlayerInitPack = (playerList) => {
   const players = [];
@@ -34,6 +35,18 @@ class Player extends Entity {
 
     if (this.pressingAttack) {
       this.shootBullet(this.mouseAngle, bulletList, initPack);
+    }
+  }
+
+  updatePosition() {
+    this.x += this.spdX;
+    this.y += this.spdY;
+
+    if (this.x < 0 || this.x > WIDTH) {
+      this.spdX = 0;
+    }
+    if (this.y < 0 || this.y > HEIGHT) {
+      this.spdY = 0;
     }
   }
 

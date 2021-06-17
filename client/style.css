@@ -13,14 +13,30 @@ html {
   line-height: 1.6;
 }
 
+/*Start Menu Styling*/
 #sign-div {
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid black;
-  margin: auto;
-  margin-top: 300px;
+  flex-direction: column;
   padding: 10px;
+  margin: auto;
+  margin-top: 205px;
+  border: 1px solid black;
+}
+
+#game-title {
+  margin-bottom: 10px;
+}
+
+#sign-div-username {
+  padding: 5px;
+}
+
+#sign-div-enter {
+  padding: 2px 10px;
+  margin-bottom: 10px;
+  border-style: 2px solid black;
 }
 
 /*Canvas Styling*/
@@ -41,6 +57,6 @@ html {
 
 /*Game Styling*/
 #game-div {
-  display: none;
   margin: 20px 425px;
+  display: none;
 }
