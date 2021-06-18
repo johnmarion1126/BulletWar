@@ -26,6 +26,8 @@ class Player extends Entity {
     this.pressingDown = false;
 
     this.mouseAngle = 0;
+    this.attackCounter = 0;
+    this.attackSpeed = 0.1;
     this.maxSpd = 10;
     this.hp = 10;
     this.hpMax = 10;
@@ -35,10 +37,12 @@ class Player extends Entity {
   }
 
   update(bulletList, initPack) {
+    this.attackCounter += this.attackSpeed;
     this.updateSpd();
     this.updatePosition();
 
-    if (this.pressingAttack) {
+    if (this.pressingAttack && this.attackCounter > 5) {
+      this.attackCounter = 0;
       this.shootBullet(this.mouseAngle, bulletList, initPack);
     }
   }
