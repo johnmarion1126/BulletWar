@@ -10,20 +10,20 @@
 </head>
 <body>
 
-    <div id="sign-div">
-        <h1 id="game-title">BULLET WAR</h1>
-        Enter Your Name: <input id="sign-div-username" type="text"><br>
-        <button id="sign-div-enter">Play</button>
+    <div class="menu-container">
+        <h1 class="game-title">BULLET WAR</h1>
+        Enter Your Name: <input class="name-input" type="text"><br>
+        <button class="play-button">Play</button>
     </div>
 
-    <div id="game-div">
+    <div class="game-container">
         <canvas id="ctx" width="500" height="500"></canvas>
-        <div id="chat-text">
+        <div class="chat-text">
             <div>Hello!</div>
         </div>
 
-        <form id="chat-form">
-            <input id="chat-input" type="text">
+        <form class="chat-form">
+            <input class="chat-input" type="text">
         </form>
     </div>
 
@@ -32,24 +32,24 @@
         const socket = io();
 
         // Sign In
-        const signDiv = document.getElementById('sign-div');
-        const signDivUsername = document.getElementById('sign-div-username');
-        const signDivEnter = document.getElementById('sign-div-enter');
-        const gameDiv = document.getElementById('game-div');
+        const menuContainer = document.getElementsByClassName('menu-container')[0];
+        const nameInput = document.getElementsByClassName('name-input')[0];
+        const playButton = document.getElementsByClassName('play-button')[0];
+        const gameContainer = document.getElementsByClassName('game-container')[0];
 
-        signDivEnter.onclick = () => {
-            socket.emit('signIn', { username: signDivUsername.value });
+        playButton.onclick = () => {
+            socket.emit('signIn', { username: nameInput.value });
         }
 
         socket.on('signInResponse', () => {
-            signDiv.style.display = 'none';
-            gameDiv.style.display = 'inline-block';
+            menuContainer.style.display = 'none';
+            gameContainer.style.display = 'inline-block';
         })
 
         // Chat
-        const chatText = document.getElementById('chat-text');
-        const chatInput = document.getElementById('chat-input');
-        const chatForm = document.getElementById('chat-form');
+        const chatText = document.getElementsByClassName('chat-text')[0];
+        const chatInput = document.getElementsByClassName('chat-input')[0];
+        const chatForm = document.getElementsByClassName('chat-form')[0];
 
         socket.on('addToChat', (data) => {
             chatText.innerHTML += '<div>' + data + '</div>';

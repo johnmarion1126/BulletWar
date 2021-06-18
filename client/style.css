@@ -14,7 +14,7 @@ html {
 }
 
 /*Start Menu Styling*/
-#sign-div {
+.menu-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -25,18 +25,24 @@ html {
   border: 2px solid black;
 }
 
-#game-title {
+.menu-container .game-title {
   margin-bottom: 10px;
 }
 
-#sign-div-username {
+.menu-container .name-input {
   padding: 5px;
 }
 
-#sign-div-enter {
+.menu-container .play-button {
   padding: 2px 10px;
   margin-bottom: 10px;
   border-style: 2px solid black;
+}
+
+/*Game Styling*/
+.game-container {
+  margin: 20px 425px;
+  display: none;
 }
 
 /*Canvas Styling*/
@@ -45,18 +51,12 @@ html {
 }
 
 /*Chat Styling*/
-#chat-text {
+.chat-text {
   width: 500px;
-  height: 100px;
+  height: 90px;
   overflow-y: scroll;
 }
 
-#chat-input {
+.chat-input {
   width: 500px;
-}
-
-/*Game Styling*/
-#game-div {
-  margin: 20px 425px;
-  display: none;
 }
