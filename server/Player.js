@@ -19,7 +19,6 @@ class Player extends Entity {
   constructor(id, initPack, name) {
     super();
     this.id = id;
-    this.number = '' + Math.floor(10 * Math.random());
     this.pressingRight = false;
     this.pressingLeft = false;
     this.pressingUp = false;
@@ -94,7 +93,6 @@ class Player extends Entity {
       id: this.id,
       x: this.x,
       y: this.y,
-      number: this.number,
       hp: this.hp,
       hpMax: this.hpMax,
       score: this.score,

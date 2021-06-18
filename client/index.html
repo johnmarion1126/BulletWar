@@ -77,7 +77,6 @@
         class Player {
             constructor(initPack) {
                 this.id = initPack.id;
-                this.number = initPack.number;
                 this.x = initPack.x;
                 this.y = initPack.y;
                 this.hp = initPack.hp;
@@ -87,9 +86,11 @@
 
             draw() {
                 const hpWidth = 30 * this.hp / this.hpMax;
+                ctx.fillStyle = 'red';
                 ctx.fillRect(this.x - hpWidth / 2, this.y - 40, hpWidth, 4);
-                ctx.fillText(this.number, this.x, this.y);
                 ctx.fillText(this.score, this.x, this.y - 60);
+                ctx.fillRect(this.x - 5, this.y - 5, 10, 10);
+                
             }
         }
 
@@ -101,6 +102,7 @@
             }
 
             draw() {
+                ctx.fillStyle = 'black';
                 ctx.fillRect(this.x - 5, this.y - 5, 10, 10);
             }
         }
