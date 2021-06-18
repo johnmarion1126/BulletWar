@@ -41,7 +41,7 @@ class Player extends Entity {
     this.updateSpd();
     this.updatePosition();
 
-    if (this.pressingAttack && this.attackCounter > 5) {
+    if (this.pressingAttack && this.attackCounter > 1) {
       this.attackCounter = 0;
       this.shootBullet(this.mouseAngle, bulletList, initPack);
     }
