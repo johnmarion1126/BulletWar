@@ -21,7 +21,7 @@
     <div class="game-container">
         <canvas id="ctx" width="500" height="500"></canvas>
         <div class="chat-text">
-            <div>Hello!</div>
+            <div>Chat Room</div>
         </div>
 
         <form class="chat-form">
@@ -40,7 +40,11 @@
         const gameContainer = document.getElementsByClassName('game-container')[0];
 
         playButton.onclick = () => {
-            socket.emit('signIn', { username: nameInput.value });
+            if (nameInput.value.length > 0) {
+                socket.emit('signIn', { username: nameInput.value });
+            } else {
+                alert("Please enter a name!");
+            }
         }
 
         socket.on('signInResponse', () => {
