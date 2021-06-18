@@ -9,7 +9,7 @@
 
 /*General Styling*/
 html {
-  font-family: Helvetica, sans-serif;
+  font-family: "Space Mono", sans-serif;
   line-height: 1.6;
 }
 
@@ -27,15 +27,19 @@ html {
 
 .menu-container .game-title {
   margin-bottom: 10px;
+  font-weight: bold;
 }
 
 .menu-container .name-input {
   padding: 5px;
+  font-family: "Space Mono", sans-serif;
+  text-align: center;
 }
 
 .menu-container .play-button {
   padding: 2px 10px;
   margin-bottom: 10px;
+  font-family: "Space Mono", sans-serif;
   border-style: 2px solid black;
 }
 
@@ -53,10 +57,11 @@ html {
 /*Chat Styling*/
 .chat-text {
   width: 500px;
-  height: 90px;
+  height: 100px;
   overflow-y: scroll;
 }
 
 .chat-input {
   width: 500px;
+  border: 1px solid black;
 }
