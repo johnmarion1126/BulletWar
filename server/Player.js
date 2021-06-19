@@ -1,11 +1,11 @@
 const Entity = require('./Entity');
 const { Bullet, getAllBulletInitPack } = require('./Bullet');
-const { WIDTH, HEIGHT } = require('./Constants');
-
-const TOP_LIMIT = 40;
-const BOTTOM_LIMIT = HEIGHT - 12;
-const LEFT_LIMIT = 18;
-const RIGHT_LIMIT = WIDTH - 20;
+const {
+  TOP_LIMIT,
+  BOTTOM_LIMIT,
+  LEFT_LIMIT,
+  RIGHT_LIMIT,
+} = require('./Constants');
 
 const getAllPlayerInitPack = (playerList) => {
   const players = [];

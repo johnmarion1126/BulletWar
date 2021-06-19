@@ -1,4 +1,8 @@
 module.exports = {
   WIDTH: 500,
   HEIGHT: 500,
+  TOP_LIMIT: 5,
+  BOTTOM_LIMIT: 495,
+  LEFT_LIMIT: 5,
+  RIGHT_LIMIT: 495,
 };

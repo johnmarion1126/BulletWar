@@ -1,5 +1,10 @@
 const Entity = require('./Entity');
-const { WIDTH, HEIGHT } = require('./Constants');
+const {
+  TOP_LIMIT,
+  BOTTOM_LIMIT,
+  LEFT_LIMIT,
+  RIGHT_LIMIT,
+} = require('./Constants');
 
 class Bullet extends Entity {
   constructor(parent, angle, initPack) {
@@ -42,10 +47,10 @@ class Bullet extends Entity {
     this.x += this.spdX;
     this.y += this.spdY;
 
-    if (this.x < 0 || this.x > WIDTH) {
+    if (this.x < LEFT_LIMIT || this.x > RIGHT_LIMIT) {
       this.spdX = -this.spdX;
     }
-    if (this.y < 0 || this.y > HEIGHT) {
+    if (this.y < TOP_LIMIT || this.y > BOTTOM_LIMIT) {
       this.spdY = -this.spdY;
     }
   }
