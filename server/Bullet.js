@@ -28,7 +28,7 @@ class Bullet extends Entity {
 
     for (const i in playerList) {
       const p = playerList[i];
-      if (this.getDistance(p) < 32 && this.parent !== p.id) {
+      if (this.getDistance(p) < 5 && this.parent !== p.id) {
         p.hp -= 1;
 
         if (p.hp <= 0) {
@@ -49,9 +49,11 @@ class Bullet extends Entity {
 
     if (this.x < LEFT_LIMIT || this.x > RIGHT_LIMIT) {
       this.spdX = -this.spdX;
+      this.parent = 0;
     }
     if (this.y < TOP_LIMIT || this.y > BOTTOM_LIMIT) {
       this.spdY = -this.spdY;
+      this.parent = 0;
     }
   }
 

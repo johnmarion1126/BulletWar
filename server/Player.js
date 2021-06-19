@@ -28,8 +28,8 @@ class Player extends Entity {
     this.attackCounter = 0;
     this.attackSpeed = 0.1;
     this.maxSpd = 10;
-    this.hp = 10;
-    this.hpMax = 10;
+    this.hp = 3;
+    this.hpMax = 3;
     this.score = 0;
     this.name = name;
     this.playerInitPackUpdate(initPack);
