@@ -1,3 +1,15 @@
+/*Colors*/
+:root {
+  --foreground-color: rgb(0, 0, 0);
+  --first-color: rgb(60, 60, 60);
+  --second-color: rgb(100, 100, 100);
+  --third-color: rgb(160, 160, 160);
+  --fourth-color: rgb(255, 255, 255);
+  --background-color: rgb(220, 220, 220);
+  --green: rgb(158, 194, 58);
+  --orange: rgb(233, 88, 35);
+}
+
 /*Reset browser for styling*/
 *,
 *::before,
@@ -11,6 +23,7 @@
 html {
   font-family: "Space Mono", sans-serif;
   line-height: 1.6;
+  background-color: var(--background-color);
 }
 
 /*Start Menu Styling*/
@@ -21,26 +34,59 @@ html {
   flex-direction: column;
   padding: 10px;
   margin: auto;
-  margin-top: 205px;
-  border: 2px solid black;
+  margin-top: 200px;
+  border-top: 4px solid var(--foreground-color);
+  border-bottom: 4px solid var(--foreground-color);
+}
+
+.menu-container .square {
+  display: inline-block;
+  margin-left: 5px;
+  width: 10px;
+  height: 10px;
+  background-color: var(--orange);
 }
 
 .menu-container .game-title {
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   font-weight: bold;
+  font-size: 3rem;
+  color: var(--foreground-color);
+}
+
+.menu-container span {
+  color: var(--first-color);
 }
 
 .menu-container .name-input {
   padding: 5px;
+  height: 35px;
+  margin-bottom: 1px;
   font-family: "Space Mono", sans-serif;
   text-align: center;
+  color: var(--primary-color);
+  border-radius: 5px;
+  border: 1px solid var(--first-color);
+  background-color: var(--fourth-color);
+}
+
+.menu-container .name-input:focus {
+  border: 2.5px solid var(--first-color);
 }
 
 .menu-container .play-button {
-  padding: 2px 10px;
-  margin-bottom: 10px;
+  padding: 3px 12px;
+  margin-bottom: 12px;
   font-family: "Space Mono", sans-serif;
-  border-style: 2px solid black;
+  border-radius: 5px;
+  border: none;
+  background-color: var(--third-color);
+  cursor: pointer;
+}
+
+.menu-container .play-button:hover {
+  padding: 1px 10px;
+  border: 2px solid var(--foreground-color);
 }
 
 /*Game Styling*/
