@@ -22,7 +22,7 @@
     <div class="game-container">
         <canvas id="ctx" width="500" height="500"></canvas>
         <div class="chat-text">
-            <div class="chat-title">Chat Room</div>
+            <div class="chat-title">Dodge & Chat!!!</div>
         </div>
 
         <form class="chat-form">
@@ -71,6 +71,7 @@
         // Game
         const ctx = document.getElementById("ctx").getContext("2d");
         ctx.font = '30px Arial';
+        let isGameFinish = false;
 
         const playerList = {};
         const bulletList = {};
@@ -87,7 +88,7 @@
 
             draw() {
                 const hpWidth = 30 * this.hp / this.hpMax;
-                ctx.fillStyle = 'red';
+                ctx.fillStyle = '#E95823';
                 ctx.fillRect(this.x - hpWidth / 2, this.y - 40, hpWidth, 4);
                 ctx.fillText(this.score, this.x, this.y - 60);
                 ctx.fillRect(this.x - 5, this.y - 5, 10, 10);
@@ -159,7 +160,15 @@
             ctx.clearRect(0, 0, 500, 500);
             for (let i in playerList) playerList[i].draw();
             for (let i in bulletList) bulletList[i].draw();
+            if (Object.keys(playerList).length === 1 && isGameFinish === false) {
+                endGame();
+            }
         }, 40);
+
+        const endGame = () => {
+            isGameFinish = true;
+            socket.emit('sendMsgToServer', 'GAME OVER!');
+        }
 
         document.onkeydown = (event) => {
             if(event.keyCode === 68)	

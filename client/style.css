@@ -101,7 +101,7 @@ html {
 .chat-text {
   position: relative;
   bottom: 8px;
-  padding: 0px 5px;
+  padding: 0px 4px;
   width: 500px;
   height: 123px;
   color: var(--second-color);
@@ -116,7 +116,7 @@ html {
 .chat-form .chat-input {
   display: absolute;
   bottom: 0;
-  padding: 2px;
+  padding: 2px 4px;
   width: 500px;
   height: 27px;
   font-family: "Space Mono", sans-serif;
@@ -136,13 +136,5 @@ html {
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #888;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: var(--background-color);
 }

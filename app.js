@@ -46,9 +46,17 @@ io.sockets.on('connection', (socket) => {
   });
 
   socket.on('sendMsgToServer', (data) => {
+    let message;
     const playerName = playerList[socket.id].name;
+
+    if (data === 'GAME OVER!') {
+      message = 'Game Over! ' + playerName + ' has won the match. Press "r" for a rematch.';
+    } else {
+      message = playerName + ': ' + data;
+    }
+
     for (const i in socketList) {
-      socketList[i].emit('addToChat', playerName + ': ' + data);
+      socketList[i].emit('addToChat', message);
     }
   });
 });
