@@ -45,7 +45,7 @@ html {
 
 /*Game Styling*/
 .game-container {
-  margin: 20px 425px;
+  margin: 20px 420px;
   display: none;
 }
 
@@ -57,7 +57,7 @@ html {
 /*Chat Styling*/
 .chat-text {
   width: 500px;
-  height: 100px;
+  height: 90px;
   overflow-y: scroll;
 }
 
