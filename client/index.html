@@ -155,9 +155,10 @@
             socket.emit('restartPositions', playerList);
             socket.emit('deleteBullets', bulletList);
             chatText.innerHTML = '<div class="chat-title">Bullet War</>';
-            isGameFinish = false;
+            setTimeout(()=> {
+                isGameFinish = false;
+            }, 1000);
             bulletList = {};
-            console.log('helllo');
         });
 
         setInterval(() => {
