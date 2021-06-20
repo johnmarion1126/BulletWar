@@ -65,6 +65,7 @@ io.sockets.on('connection', (socket) => {
       const player = playerList[i];
       player.x = Math.random() * 500;
       player.y = Math.random() * 500;
+      player.isInShadowRealm = false;
     }
   });
 });

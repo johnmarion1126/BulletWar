@@ -22,7 +22,7 @@
     <div class="game-container">
         <canvas id="ctx" width="500" height="500"></canvas>
         <div class="chat-text">
-            <div class="chat-title">Shoot & Chat!</div>
+            <div class="chat-title">Bullet War</div>
         </div>
 
         <form class="chat-form">
@@ -126,8 +126,6 @@
                         p.y = pack.y;
                     if(pack.hp !== undefined)
                         p.hp = pack.hp;
-                    if(pack.score !== undefined)
-                        p.score = pack.score;
                 }
             }
             for (let i = 0; i < data.bullet.length; i += 1) {
@@ -155,7 +153,6 @@
             ctx.clearRect(0, 0, 500, 500);
             for (let i in playerList) playerList[i].draw();
             for (let i in bulletList) bulletList[i].draw();
-            if (Object.keys(playerList).length === 1 && isGameFinish === false) endGame();
             
         }, 40);
 
@@ -193,7 +190,7 @@
         };
 
         document.onmousemove = (event) => {
-            const x = -250 + event.clientX - 8 + -425;
+            const x = -250 + event.clientX - 8 + -433;
             const y = -250 + event.clientY - 8;
             const angle = Math.atan2(y,x) / Math.PI * 180;
             socket.emit('keyPress', { inputId: 'mouseAngle', state: angle });

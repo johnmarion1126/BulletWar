@@ -29,19 +29,23 @@ class Player extends Entity {
     this.attackSpeed = 0.1;
     this.maxSpd = 10;
     this.hp = 3;
+    this.lives = 3;
+    this.isInShadowRealm = false;
     this.color = '#E95823';
     this.name = name;
     this.playerInitPackUpdate(initPack);
   }
 
   update(bulletList, initPack) {
-    this.attackCounter += this.attackSpeed;
-    this.updateSpd();
-    this.updatePosition();
+    if (!this.isInShadowRealm) {
+      this.attackCounter += this.attackSpeed;
+      this.updateSpd();
+      this.updatePosition();
 
-    if (this.pressingAttack && this.attackCounter > 1) {
-      this.attackCounter = 0;
-      this.shootBullet(this.mouseAngle, bulletList, initPack);
+      if (this.pressingAttack && this.attackCounter > 1) {
+        this.attackCounter = 0;
+        this.shootBullet(this.mouseAngle, bulletList, initPack);
+      }
     }
   }
 

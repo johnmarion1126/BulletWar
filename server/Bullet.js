@@ -32,11 +32,17 @@ class Bullet extends Entity {
         p.hp -= 1;
 
         if (p.hp <= 0) {
-          const shooter = playerList[this.parent];
-          if (shooter) shooter.score += 1;
-          p.hp = 3;
-          p.x = Math.random() * 500;
-          p.y = Math.random() * 500;
+          p.lives -= 1;
+          // shadow realm
+          if (p.lives === 0) {
+            p.isInShadowRealm = true;
+            p.x = 700;
+            p.y = 700;
+          } else {
+            p.hp = 3;
+            p.x = Math.random() * 500;
+            p.y = Math.random() * 500;
+          }
         }
         this.toRemove = true;
       }
