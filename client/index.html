@@ -71,10 +71,10 @@
         // Game
         const ctx = document.getElementById("ctx").getContext("2d");
         ctx.font = '30px Arial';
-        let isGameFinish = true;
 
         let playerList = {};
         let bulletList = {};
+        let isGameFinish = true;
 
         class Player {
             constructor(initPack) {
@@ -154,18 +154,16 @@
         setInterval(() => {
             ctx.clearRect(0, 0, 500, 500);
             let safePlayers = 0;
-            let winner;
             for (let i in playerList) {
                 const player = playerList[i];
                 // check if player is in the shadow realm
                 if (!(player.x === 700) && !(player.y === 700)) {
-                    winner = player;
                     safePlayers += 1;
                     player.draw();
                 }
             }
             for (let i in bulletList) bulletList[i].draw();
-            if (safePlayers === 1 && isGameFinish === false && Object.keys(playerList).length > 1) endGame(winner);
+            if (safePlayers === 1 && isGameFinish === false && Object.keys(playerList).length > 1) isGameFinish = true;
         }, 40);
 
         document.onkeydown = (event) => {
@@ -208,15 +206,12 @@
             socket.emit('keyPress', { inputId: 'mouseAngle', state: angle });
         };
 
-        const endGame = (player) => {
-            isGameFinish = true;
-            socket.emit('sendMsgToServer', 'GAME OVER!');
-        }
-
         const restartGame = () => {
-            isGameFinish = false;
-            bulletList = {};
             socket.emit('restartPositions', playerList);
+            socket.emit('deleteBullets', bulletList);
+            bulletList = {};
+            chatText.innerHTML = '<div class="chat-title">Bullet War</div>';
+            isGameFinish = false;
         }
 
     </script>

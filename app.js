@@ -46,26 +46,26 @@ io.sockets.on('connection', (socket) => {
   });
 
   socket.on('sendMsgToServer', (data) => {
-    let message;
     const playerName = playerList[socket.id].name;
-
-    if (data === 'GAME OVER!') {
-      message = 'Game Over! ' + playerName + ' won the battle, but not the war. Press "r" for the next battle.';
-    } else {
-      message = playerName + ': ' + data;
-    }
-
     for (const i in socketList) {
-      socketList[i].emit('addToChat', message);
+      socketList[i].emit('addToChat', playerName + ': ' + data);
     }
   });
 
   socket.on('restartPositions', (data) => {
     for (const i in data) {
       const player = playerList[i];
+      player.lives = 3;
+      player.hp = 3;
       player.x = Math.random() * 500;
       player.y = Math.random() * 500;
       player.isInShadowRealm = false;
+    }
+  });
+
+  socket.on('deleteBullets', (data) => {
+    for (const i in data) {
+      delete bulletList[i];
     }
   });
 });
