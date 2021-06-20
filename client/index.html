@@ -73,8 +73,8 @@
         ctx.font = '30px Arial';
         let isGameFinish = false;
 
-        const playerList = {};
-        const bulletList = {};
+        let playerList = {};
+        let bulletList = {};
 
         class Player {
             constructor(initPack) {
@@ -160,35 +160,32 @@
             ctx.clearRect(0, 0, 500, 500);
             for (let i in playerList) playerList[i].draw();
             for (let i in bulletList) bulletList[i].draw();
-            if (Object.keys(playerList).length === 1 && isGameFinish === false) {
-                endGame();
-            }
+            if (Object.keys(playerList).length === 1 && isGameFinish === false) endGame();
+            
         }, 40);
 
-        const endGame = () => {
-            isGameFinish = true;
-            socket.emit('sendMsgToServer', 'GAME OVER!');
-        }
-
         document.onkeydown = (event) => {
-            if(event.keyCode === 68)	
+            if (event.keyCode === 68)	
 			    socket.emit('keyPress', { inputId: 'right', state: true });
-		    else if(event.keyCode === 83)	
+		    else if (event.keyCode === 83)	
 			    socket.emit('keyPress', { inputId: 'down', state: true });
-		    else if(event.keyCode === 65) 
+		    else if (event.keyCode === 65) 
 			    socket.emit('keyPress', { inputId: 'left', state: true });
-		    else if(event.keyCode === 87) 
+		    else if (event.keyCode === 87) 
 			    socket.emit('keyPress', { inputId: 'up', state: true });
+            else if (event.keyCode === 82 && isGameFinish === true) {
+                restartGame();
+            }
         };
 
         document.onkeyup = function(event){
-            if(event.keyCode === 68)	
+            if (event.keyCode === 68)	
                 socket.emit('keyPress', { inputId: 'right', state: false });
-            else if(event.keyCode === 83)	
+            else if (event.keyCode === 83)	
                 socket.emit('keyPress', { inputId: 'down', state: false });
-            else if(event.keyCode === 65) 
+            else if (event.keyCode === 65) 
                 socket.emit('keyPress', { inputId: 'left', state: false });
-            else if(event.keyCode === 87) 
+            else if (event.keyCode === 87) 
                 socket.emit('keyPress', { inputId: 'up', state: false });
         }
 
@@ -206,6 +203,18 @@
             const angle = Math.atan2(y,x) / Math.PI * 180;
             socket.emit('keyPress', { inputId: 'mouseAngle', state: angle });
         };
+
+        const endGame = () => {
+            isGameFinish = true;
+            socket.emit('sendMsgToServer', 'GAME OVER!');
+        }
+
+        const restartGame = () => {
+            bulletList = {};
+            isGameFinish = false;
+            socket.emit('restartPositions', playerList);
+            
+        }
 
     </script>
 </body>
