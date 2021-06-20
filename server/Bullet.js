@@ -38,8 +38,8 @@ class Bullet extends Entity {
             p.y = 700;
           } else {
             p.hp = 3;
-            p.x = Math.random() * 500;
-            p.y = Math.random() * 500;
+            p.x = 250;
+            p.y = 250;
           }
         }
         this.toRemove = true;

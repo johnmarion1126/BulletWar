@@ -63,8 +63,8 @@ io.sockets.on('connection', (socket) => {
       const player = playerList[i];
       player.lives = 3;
       player.hp = 3;
-      player.x = Math.random() * 500;
-      player.y = Math.random() * 500;
+      player.x = 250;
+      player.y = 250;
       player.isInShadowRealm = false;
     }
   });
