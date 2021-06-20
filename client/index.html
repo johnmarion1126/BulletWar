@@ -22,7 +22,7 @@
     <div class="game-container">
         <canvas id="ctx" width="500" height="500"></canvas>
         <div class="chat-text">
-            <div class="chat-title">Dodge & Chat!!!</div>
+            <div class="chat-title">Shoot & Chat!</div>
         </div>
 
         <form class="chat-form">
@@ -81,16 +81,11 @@
                 this.id = initPack.id;
                 this.x = initPack.x;
                 this.y = initPack.y;
-                this.hp = initPack.hp;
-                this.hpMax = initPack.hpMax;
-                this.score = initPack.score;
+                this.color = initPack.color;
             }
 
             draw() {
-                const hpWidth = 30 * this.hp / this.hpMax;
-                ctx.fillStyle = '#E95823';
-                ctx.fillRect(this.x - hpWidth / 2, this.y - 40, hpWidth, 4);
-                ctx.fillText(this.score, this.x, this.y - 60);
+                ctx.fillStyle = this.color;
                 ctx.fillRect(this.x - 5, this.y - 5, 10, 10);
                 
             }

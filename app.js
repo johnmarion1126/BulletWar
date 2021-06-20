@@ -50,7 +50,7 @@ io.sockets.on('connection', (socket) => {
     const playerName = playerList[socket.id].name;
 
     if (data === 'GAME OVER!') {
-      message = 'Game Over. ' + playerName + ' won the battle, but not the war. Press "r" for a rematch.';
+      message = 'Game Over! ' + playerName + ' won the battle, but not the war. Press "r" for a rematch.';
     } else {
       message = playerName + ': ' + data;
     }

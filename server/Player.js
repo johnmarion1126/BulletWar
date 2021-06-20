@@ -29,8 +29,7 @@ class Player extends Entity {
     this.attackSpeed = 0.1;
     this.maxSpd = 10;
     this.hp = 3;
-    this.hpMax = 3;
-    this.score = 0;
+    this.color = '#E95823';
     this.name = name;
     this.playerInitPackUpdate(initPack);
   }
@@ -93,9 +92,7 @@ class Player extends Entity {
       id: this.id,
       x: this.x,
       y: this.y,
-      hp: this.hp,
-      hpMax: this.hpMax,
-      score: this.score,
+      color: this.color,
     };
   }
 
@@ -105,7 +102,6 @@ class Player extends Entity {
       x: this.x,
       y: this.y,
       hp: this.hp,
-      score: this.score,
     };
   }
 

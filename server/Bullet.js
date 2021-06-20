@@ -34,7 +34,7 @@ class Bullet extends Entity {
         if (p.hp <= 0) {
           const shooter = playerList[this.parent];
           if (shooter) shooter.score += 1;
-          p.hp = p.hpMax;
+          p.hp = 3;
           p.x = Math.random() * 500;
           p.y = Math.random() * 500;
         }
