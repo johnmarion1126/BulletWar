@@ -108,7 +108,7 @@
                 const player = new Player(data.player[i]);
                 playerList[player.id] = player;
                 if (Object.keys(playerList).length > 1) {
-                    restartGame();
+                    socket.emit('restartGame');
                 }
             }
             for (let i = 0; i < data.bullet.length; i += 1) {
@@ -149,7 +149,16 @@
             for (let i = 0; i < data.bullet.length; i += 1) {
                 delete bulletList[data.bullet[i]];
             }
-        })
+        });
+
+        socket.on('restart', () => {
+            socket.emit('restartPositions', playerList);
+            socket.emit('deleteBullets', bulletList);
+            chatText.innerHTML = '<div class="chat-title">Bullet War</>';
+            isGameFinish = false;
+            bulletList = {};
+            console.log('helllo');
+        });
 
         setInterval(() => {
             ctx.clearRect(0, 0, 500, 500);
@@ -163,7 +172,9 @@
                 }
             }
             for (let i in bulletList) bulletList[i].draw();
-            if (safePlayers === 1 && isGameFinish === false && Object.keys(playerList).length > 1) isGameFinish = true;
+            if (safePlayers === 1 && isGameFinish === false && Object.keys(playerList).length > 1) {
+                endGame();
+            }
         }, 40);
 
         document.onkeydown = (event) => {
@@ -176,7 +187,7 @@
 		    else if (event.keyCode === 87) 
 			    socket.emit('keyPress', { inputId: 'up', state: true });
             else if (event.keyCode === 82 && isGameFinish === true || Object.keys(playerList).length === 1) {
-                restartGame();
+                socket.emit('restartGame');
             }
         };
 
@@ -206,12 +217,9 @@
             socket.emit('keyPress', { inputId: 'mouseAngle', state: angle });
         };
 
-        const restartGame = () => {
-            socket.emit('restartPositions', playerList);
-            socket.emit('deleteBullets', bulletList);
-            bulletList = {};
-            chatText.innerHTML = '<div class="chat-title">Bullet War</div>';
-            isGameFinish = false;
+        const endGame = () => {
+            isGameFinish = true;
+            chatText.innerHTML += '<div>The battle has past, but the war still continues.Press "r" to restart</div>';
         }
 
     </script>

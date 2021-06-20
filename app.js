@@ -52,6 +52,12 @@ io.sockets.on('connection', (socket) => {
     }
   });
 
+  socket.on('restartGame', () => {
+    for (const i in socketList) {
+      socketList[i].emit('restart');
+    }
+  });
+
   socket.on('restartPositions', (data) => {
     for (const i in data) {
       const player = playerList[i];

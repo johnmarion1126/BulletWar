@@ -30,8 +30,6 @@ class Bullet extends Entity {
       const p = playerList[i];
       if (this.getDistance(p) < 10 && this.parent !== p.id) {
         p.hp -= 1;
-        console.log('hit');
-
         if (p.hp <= 0) {
           p.lives -= 1;
           if (p.lives <= 0) {
