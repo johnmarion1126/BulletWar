@@ -28,7 +28,7 @@ html {
 
 /*Start Menu Styling*/
 .menu-container {
-  width: 500px;
+  width: 525px;
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -91,42 +91,53 @@ html {
 
 /*Game Styling*/
 .game-container {
-  margin-left: 433px;
+  display: flex;
+  justify-content: center;
+  margin-left: 421px;
+  padding: 10px;
+  width: 525px;
   height: 100vh;
   display: none;
   background-color: var(--background-color);
 }
 
+#ctx {
+  border: 2px solid var(--foreground-color);
+  border-radius: 5px;
+  overflow: hidden;
+}
+
 /*Chat Styling*/
-.chat-text {
-  position: relative;
-  bottom: 8px;
+
+.chat-box {
+  border: 2px solid var(--foreground-color);
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.chat-box .chat-text {
   padding: 0px 4px;
   width: 500px;
-  height: 123px;
+  height: 100px;
   color: var(--second-color);
-  border-top: 3px solid var(--foreground-color);
   overflow-y: scroll;
 }
 
-.chat-text .chat-title {
+.chat-box .chat-title {
   color: var(--foreground-color);
 }
 
-.chat-form .chat-input {
-  display: absolute;
-  bottom: 0;
+.chat-box .chat-input {
   padding: 2px 4px;
-  width: 500px;
+  width: 501px;
   height: 27px;
   font-family: "Space Mono", sans-serif;
   color: var(--first-color);
   border-style: none;
   border-top: 2px solid var(--first-color);
-  border-bottom: 2px solid var(--first-color);
 }
 
-.chat-form .chat-input:focus {
+.chat-box .chat-input:focus {
   outline: none;
 }
 
