@@ -33,8 +33,7 @@ class Bullet extends Entity {
 
         if (p.hp <= 0) {
           p.lives -= 1;
-          // shadow realm
-          if (p.lives === 0) {
+          if (p.lives <= 0) {
             p.isInShadowRealm = true;
             p.x = 700;
             p.y = 700;

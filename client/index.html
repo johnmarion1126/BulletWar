@@ -71,7 +71,7 @@
         // Game
         const ctx = document.getElementById("ctx").getContext("2d");
         ctx.font = '30px Arial';
-        let isGameFinish = false;
+        let isGameFinish = true;
 
         let playerList = {};
         let bulletList = {};
@@ -87,7 +87,6 @@
             draw() {
                 ctx.fillStyle = this.color;
                 ctx.fillRect(this.x - 5, this.y - 5, 10, 10);
-                
             }
         }
 
@@ -108,6 +107,9 @@
             for (let i = 0; i < data.player.length; i += 1) {
                 const player = new Player(data.player[i]);
                 playerList[player.id] = player;
+                if (Object.keys(playerList).length > 1) {
+                    restartGame();
+                }
             }
             for (let i = 0; i < data.bullet.length; i += 1) {
                 const bullet = new Bullet(data.bullet[i]);
@@ -151,9 +153,19 @@
 
         setInterval(() => {
             ctx.clearRect(0, 0, 500, 500);
-            for (let i in playerList) playerList[i].draw();
+            let safePlayers = 0;
+            let winner;
+            for (let i in playerList) {
+                const player = playerList[i];
+                // check if player is in the shadow realm
+                if (!(player.x === 700) && !(player.y === 700)) {
+                    winner = player;
+                    safePlayers += 1;
+                    player.draw();
+                }
+            }
             for (let i in bulletList) bulletList[i].draw();
-            
+            if (safePlayers === 1 && isGameFinish === false && Object.keys(playerList).length > 1) endGame(winner);
         }, 40);
 
         document.onkeydown = (event) => {
@@ -165,7 +177,7 @@
 			    socket.emit('keyPress', { inputId: 'left', state: true });
 		    else if (event.keyCode === 87) 
 			    socket.emit('keyPress', { inputId: 'up', state: true });
-            else if (event.keyCode === 82 && isGameFinish === true) {
+            else if (event.keyCode === 82 && isGameFinish === true || Object.keys(playerList).length === 1) {
                 restartGame();
             }
         };
@@ -196,16 +208,15 @@
             socket.emit('keyPress', { inputId: 'mouseAngle', state: angle });
         };
 
-        const endGame = () => {
+        const endGame = (player) => {
             isGameFinish = true;
             socket.emit('sendMsgToServer', 'GAME OVER!');
         }
 
         const restartGame = () => {
-            bulletList = {};
             isGameFinish = false;
+            bulletList = {};
             socket.emit('restartPositions', playerList);
-            
         }
 
     </script>
