@@ -20,3 +20,9 @@ A bullet hell game inspired by <i>spacewar!</i> Play against your friends and tr
 <p align="center">
    <img src="./images/GameEnd.png" height=400>
 </p>
+
+# References
+
+- [ScriptersWar's Multiplayer Nodejs Tutorial](https://scripterswar.com/tutorial/nodejs#)
+
+- [ScriptersWar's HTML5 Game Tutorial](https://scripterswar.com/tutorial/html5)
