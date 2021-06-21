@@ -214,7 +214,7 @@
         };
 
         document.onmousemove = (event) => {
-            const x = -250 + event.clientX - 8 + -435;
+            const x = -250 + event.clientX - 8 + -421;
             const y = -250 + event.clientY - 8;
             const angle = Math.atan2(y,x) / Math.PI * 180;
             socket.emit('keyPress', { inputId: 'mouseAngle', state: angle });
