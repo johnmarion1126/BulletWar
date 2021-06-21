@@ -1,6 +1,6 @@
 # BulletWar
 
-A bullet hell game inspired by <i>spacewar!</i> Play against your friends and try to outlast them by shooting and dodging bullets. Built with html, css, javascript, and socket.io. Hosted on Heroku on https://bulletwar.herokuapp.com/.
+A online multiplayer bullet hell game inspired by <i>spacewar!</i> Play against your friends and try to outlast them by shooting and dodging bullets. Built with html, css, javascript, and socket.io. Hosted on Heroku on https://bulletwar.herokuapp.com/.
 
 # How To Play
 
