@@ -4,13 +4,13 @@ A bullet hell game inspired by <i>spacewar!</i> Play against your friends and tr
 
 # How To Play
 
-1. You can play the game solo, but it's more fun with friends.You first start a game by entering your name in the game title. A new game will start when there are at least two players in the game.
+1. You can play the game solo or with friends. You first start a game by entering your name in the game title. A new game will start when a second player joins the game.
 
 <p align="center">
    <img src="./images/GameTitle.png" height=400>
 </p>
 
-2. Shoot bullets with the left mouse button and dodge using WASD keys. Each player has 3 lives with 3 HP for each lives. Once all 3 lives are depleted, that player is out of the game and is sent to the shadow realm.
+2. Shoot bullets with the left mouse button and dodge using WASD keys. Each player has 3 lives with 3 HP for each life. Once all 3 lives are depleted, that player is out of the game and is sent to the shadow realm.
 
 <p align="center">
    <img src="./images/GameScreen.png" height=400>
