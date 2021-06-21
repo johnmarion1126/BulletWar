@@ -11,7 +11,7 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '/client/index.html'));
 });
 
-server.listen(2000);
+server.listen(process.env.PORT || 2000);
 
 // eslint-disable-next-line no-console
 console.log('Server started');
