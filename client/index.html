@@ -76,7 +76,7 @@
 
         let playerList = {};
         let bulletList = {};
-        let isGameFinish = true;
+        let isGameFinish = false;
 
         class Player {
             constructor(initPack) {
@@ -175,8 +175,12 @@
                 }
             }
             for (let i in bulletList) bulletList[i].draw();
-            if (safePlayers === 1 && isGameFinish === false && Object.keys(playerList).length > 1) {
-                endGame();
+            if (!isGameFinish) {
+                if (safePlayers === 1 && Object.keys(playerList).length > 1) {
+                    endGame();
+                } else if (safePlayers === 0 && Object.keys(playerList).length === 1) {
+                    endGame();
+                }
             }
         }, 40);
 
@@ -189,7 +193,7 @@
 			    socket.emit('keyPress', { inputId: 'left', state: true });
 		    else if (event.keyCode === 87) 
 			    socket.emit('keyPress', { inputId: 'up', state: true });
-            else if (event.keyCode === 82 && isGameFinish === true || Object.keys(playerList).length === 1) {
+            else if (event.keyCode === 82 && isGameFinish === true) {
                 socket.emit('restartGame');
             }
         };
