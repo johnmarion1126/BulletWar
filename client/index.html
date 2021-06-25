@@ -133,6 +133,13 @@
                 const bullet = new Bullet(data.bullet[i]);
                 bulletList[bullet.id] = bullet;
             }
+
+            if (data.powerUp !== undefined) {
+                for (let i = 0; i < data.powerUp.length; i += 1) {
+                    const powerUp = new PowerUp(data.powerUp[i]);
+                    powerUpList[powerUp.id] = powerUp;
+                }
+            }
         });
 
         socket.on('update', (data) => {
@@ -167,6 +174,9 @@
             for (let i = 0; i < data.bullet.length; i += 1) {
                 delete bulletList[data.bullet[i]];
             }
+            for (let i = 0; i < data.powerUp.length; i += 1) {
+                delete powerUpList[data.powerUp[i]];
+            }
         });
 
         socket.on('restart', () => {
@@ -181,9 +191,8 @@
 
         setInterval(() => {
             ctx.clearRect(0, 0, 500, 500);
-            for (let i in bulletList) {
-                bulletList[i].draw();
-            }
+            for (let i in bulletList) bulletList[i].draw();
+            for (let i in powerUpList) powerUpList[i].draw();
 
             let safePlayers = 0;
             for (let i in playerList) {

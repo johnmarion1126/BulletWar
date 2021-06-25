@@ -9,14 +9,13 @@ class PowerUp extends Entity {
     this.y = Math.random() * HEIGHT;
     this.color = '#9ec23a';
     this.toRemove = false;
-    this.pickUpInitPackUpdate(initPack);
+    this.powerUpInitPackUpdate(initPack);
   }
 
   update(playerList) {
     for (const i in playerList) {
       const p = playerList[i];
-      if (this.getDistance(p) < 10) {
-        console.log('Upgrade Mode!');
+      if (this.getDistance(p) < 15) {
         this.toRemove = true;
       }
     }
@@ -31,19 +30,19 @@ class PowerUp extends Entity {
     };
   }
 
-  pickUpInitPackUpdate(initPack) {
-    initPack.pickUp.push(this.getInitPack());
+  powerUpInitPackUpdate(initPack) {
+    initPack.powerUp.push(this.getInitPack());
   }
 }
 
-const powerUpUpdate = (pickUpList, playerList, removePack) => {
-  for (const i in pickUpList) {
-    const pickUp = pickUpList[i];
+const powerUpUpdate = (powerUpList, playerList, removePack) => {
+  for (const i in powerUpList) {
+    const pickUp = powerUpList[i];
     pickUp.update(playerList);
 
     if (pickUp.toRemove) {
-      delete pickUpList[i];
-      removePack.bullet.push(pickUp.id);
+      delete powerUpList[i];
+      removePack.powerUp.push(pickUp.id);
     }
   }
 };
