@@ -16,7 +16,11 @@ class PowerUp extends Entity {
     for (const i in playerList) {
       const p = playerList[i];
       if (this.getDistance(p) < 15) {
+        p.powerUp = true;
         this.toRemove = true;
+        setTimeout(() => {
+          p.powerUp = false;
+        }, 5000);
       }
     }
   }

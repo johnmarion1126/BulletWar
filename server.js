@@ -85,7 +85,7 @@ io.sockets.on('connection', (socket) => {
 setInterval(() => {
   const powerUp = new PowerUp(initPack);
   powerUpList[powerUp.id] = powerUp;
-}, 5000);
+}, 20000);
 
 setInterval(() => {
   const pack = {

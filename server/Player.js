@@ -33,6 +33,7 @@ class Player extends Entity {
     this.isInShadowRealm = false;
     this.color = '#E95823';
     this.name = name;
+    this.powerUp = false;
     this.playerInitPackUpdate(initPack);
   }
 
@@ -42,9 +43,16 @@ class Player extends Entity {
       this.updateSpd();
       this.updatePosition();
 
-      if (this.pressingAttack && this.attackCounter > 1) {
-        this.attackCounter = 0;
-        this.shootBullet(this.mouseAngle, bulletList, initPack);
+      if (this.pressingAttack && this.attackCounter > 3) {
+        if (!this.powerUp) {
+          this.attackCounter = 0;
+          this.shootBullet(this.mouseAngle, bulletList, initPack);
+        } else {
+          this.attackCounter = 1;
+          this.shootBullet(this.mouseAngle - 5, bulletList, initPack);
+          this.shootBullet(this.mouseAngle, bulletList, initPack);
+          this.shootBullet(this.mouseAngle + 5, bulletList, initPack);
+        }
       }
     }
   }
