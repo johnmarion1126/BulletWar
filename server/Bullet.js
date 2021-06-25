@@ -13,17 +13,12 @@ class Bullet extends Entity {
     this.spdX = Math.cos(angle / 180 * Math.PI) * 10;
     this.spdY = Math.sin(angle / 180 * Math.PI) * 10;
     this.parent = parent;
-    this.timer = 0;
     this.toRemove = false;
+    this.color = '#000000';
     this.bulletInitPackUpdate(initPack);
   }
 
   update(playerList) {
-    this.time += 1;
-    if (this.timer > 100) {
-      this.toRemove = true;
-    }
-
     this.updatePosition();
 
     for (const i in playerList) {
@@ -66,6 +61,7 @@ class Bullet extends Entity {
       id: this.id,
       x: this.x,
       y: this.y,
+      color: this.color,
     };
   }
 

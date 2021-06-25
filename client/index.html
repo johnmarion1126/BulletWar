@@ -76,6 +76,7 @@
 
         let playerList = {};
         let bulletList = {};
+        let powerUpList = {};
         let isGameFinish = false;
 
         class Player {
@@ -97,10 +98,25 @@
                 this.id = initPack.id;
                 this.x = initPack.x;
                 this.y = initPack.y;
+                this.color = initPack.color;
             }
 
             draw() {
-                ctx.fillStyle = 'black';
+                ctx.fillStyle = this.color;
+                ctx.fillRect(this.x - 5, this.y - 5, 10, 10);
+            }
+        }
+
+        class PowerUp {
+            constructor(initPack) {
+                this.id = initPack.id;
+                this.x = initPack.x;
+                this.y = initPack.y;
+                this.color = initPack.color;
+            }
+
+            draw() {
+                ctx.fillStyle = this.color;
                 ctx.fillRect(this.x - 5, this.y - 5, 10, 10);
             }
         }
@@ -165,6 +181,10 @@
 
         setInterval(() => {
             ctx.clearRect(0, 0, 500, 500);
+            for (let i in bulletList) {
+                bulletList[i].draw();
+            }
+
             let safePlayers = 0;
             for (let i in playerList) {
                 const player = playerList[i];
@@ -174,7 +194,7 @@
                     player.draw();
                 }
             }
-            for (let i in bulletList) bulletList[i].draw();
+
             if (!isGameFinish) {
                 if (safePlayers === 1 && Object.keys(playerList).length > 1) {
                     endGame();
@@ -183,6 +203,11 @@
                 }
             }
         }, 40);
+
+        const endGame = () => {
+            isGameFinish = true;
+            chatText.innerHTML += '<div>The battle has past, but the war continues. Press "r" for a new game.</div>';
+        }
 
         document.onkeydown = (event) => {
             if (event.keyCode === 68)	
@@ -223,11 +248,6 @@
             const angle = Math.atan2(y,x) / Math.PI * 180;
             socket.emit('keyPress', { inputId: 'mouseAngle', state: angle });
         };
-
-        const endGame = () => {
-            isGameFinish = true;
-            chatText.innerHTML += '<div>The battle has past, but the war continues. Press "r" for a new game.</div>';
-        }
 
     </script>
 </body>

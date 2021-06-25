@@ -24,12 +24,18 @@ const {
 
 const { bulletUpdate } = require('./server/Bullet');
 
+const {
+  PowerUp,
+  powerUpUpdate,
+} = require('./server/PowerUp');
+
 const socketList = {};
 const playerList = {};
 const bulletList = {};
+const powerUpList = {};
 
-const initPack = { player: [], bullet: [] };
-const removePack = { player: [], bullet: [] };
+const initPack = { player: [], bullet: [], powerUp: [] };
+const removePack = { player: [], bullet: [], powerUp: [] };
 
 io.sockets.on('connection', (socket) => {
   socket.id = Math.random();
@@ -80,6 +86,7 @@ setInterval(() => {
   const pack = {
     player: playerUpdate(playerList, bulletList, initPack),
     bullet: bulletUpdate(bulletList, playerList, removePack),
+    powerUp: powerUpUpdate(powerUpList, playerList, removePack),
   };
 
   for (const i in socketList) {
@@ -90,6 +97,8 @@ setInterval(() => {
   }
   initPack.player = [];
   initPack.bullet = [];
+  initPack.powerUp = [];
   removePack.player = [];
   removePack.bullet = [];
+  removePack.powerUp = [];
 }, 1000 / 25);
