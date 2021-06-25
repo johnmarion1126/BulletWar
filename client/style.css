@@ -120,11 +120,13 @@ html {
   width: 500px;
   height: 100px;
   color: var(--second-color);
+  user-select: none;
   overflow-y: scroll;
 }
 
 .chat-box .chat-title {
   color: var(--foreground-color);
+  user-select: none;
 }
 
 .chat-box .chat-input {
