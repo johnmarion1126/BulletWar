@@ -75,16 +75,21 @@ io.sockets.on('connection', (socket) => {
     }
   });
 
-  socket.on('deleteBullets', (data) => {
-    for (const i in data) {
+  socket.on('deleteEntities', (bullet, powerUp) => {
+    for (const i in bullet) {
       delete bulletList[i];
+    }
+    for (const i in powerUp) {
+      delete powerUpList[i];
     }
   });
 });
 
 setInterval(() => {
-  const powerUp = new PowerUp(initPack);
-  powerUpList[powerUp.id] = powerUp;
+  if (Object.keys(playerList).length > 0) {
+    const powerUp = new PowerUp(initPack);
+    powerUpList[powerUp.id] = powerUp;
+  }
 }, 20000);
 
 setInterval(() => {

@@ -181,12 +181,13 @@
 
         socket.on('restart', () => {
             socket.emit('restartPositions', playerList);
-            socket.emit('deleteBullets', bulletList);
+            socket.emit('deleteEntities', bulletList, powerUpList);
             chatText.innerHTML = '<div class="chat-title">Bullet War</>';
             setTimeout(()=> {
                 isGameFinish = false;
             }, 1000);
             bulletList = {};
+            powerUpList = {};
         });
 
         setInterval(() => {
