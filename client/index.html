@@ -125,9 +125,7 @@
             for (let i = 0; i < data.player.length; i += 1) {
                 const player = new Player(data.player[i]);
                 playerList[player.id] = player;
-                if (Object.keys(playerList).length > 1) {
-                    socket.emit('restartGame');
-                }
+                socket.emit('restartGame');
             }
             for (let i = 0; i < data.bullet.length; i += 1) {
                 const bullet = new Bullet(data.bullet[i]);
